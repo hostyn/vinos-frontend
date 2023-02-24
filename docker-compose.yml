@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  vinos-frontend:
+    container_name: vinos-frontend
+    restart: always
+    environment:
+      - BACKEND_URI=http://vinos-backend:3000
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    links:
+      - vinos-backend
+    ports: 
+      - 4000:3000
+    volumes:
+      - .:/usr/src/app
+
+
+  vinos-backend:
+    container_name: vinos-backend
+    restart: always
+    image: ghcr.io/hostyn/vinos-backend
+    environment:
+      - PORT=3000
+      - MONGODB_URI=mongodb://mongo/vinosdb
+      - PRIVATE_KEY=supersecretkey
+    links:
+      - mongo
+    ports:
+      - 3000:3000
+
+  mongo:
+    container_name: mongodb
+    image: mongo
+    ports:
+      - "27017:27017"
