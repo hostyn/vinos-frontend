@@ -1,9 +1,33 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
 
 const App = (): JSX.Element => {
   const [count, setCount] = useState(0)
+
+  const handleClick = async (): Promise<void> => {
+    await fetch((import.meta.env.VITE_BACKEND_URI as string) + '/registry', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: 'test@test.com',
+        password: 'passsword',
+      }),
+    })
+
+    const res = await fetch(
+      (import.meta.env.VITE_BACKEND_URI as string) + '/measurements',
+      {
+        credentials: 'include',
+        method: 'GET',
+      }
+    )
+
+    console.log(await res.json())
+  }
 
   return (
     <div className="App">
@@ -31,6 +55,7 @@ const App = (): JSX.Element => {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <button onClick={handleClick}>Test</button>
     </div>
   )
 }

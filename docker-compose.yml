@@ -5,7 +5,7 @@ services:
     container_name: vinos-frontend
     restart: always
     environment:
-      - BACKEND_URI=http://vinos-backend:3000
+      - VITE_BACKEND_URI=http://localhost:3000
     build:
       context: .
       dockerfile: Dockerfile.dev
@@ -20,7 +20,7 @@ services:
   vinos-backend:
     container_name: vinos-backend
     restart: always
-    image: ghcr.io/hostyn/vinos-backend
+    image: ghcr.io/hostyn/vinos-backend:latest
     environment:
       - PORT=3000
       - MONGODB_URI=mongodb://mongo/vinosdb
