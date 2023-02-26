@@ -1,6 +1,6 @@
 import { VITE_BACKEND_URI } from '../config/constants'
 
-interface IUser {
+export interface IUser {
   email: string
   password: string
 }

@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import type React from 'react'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import PasswordIcon from '../components/icons/PasswordIcon'
 import UserIcon from '../components/icons/UserIcon'
 import Modal from '../components/Modal'
@@ -12,7 +11,7 @@ import Link from '../components/ui/Link'
 import Text from '../components/ui/Text'
 import Title from '../components/ui/Title'
 import { COLORS } from '../config/constants'
-import { register } from '../services/auth'
+import { useAuth } from '../context/authContext'
 
 interface IError {
   email: null | string
@@ -21,7 +20,7 @@ interface IError {
 }
 
 export default function Register(): JSX.Element {
-  const navigate = useNavigate()
+  const { register } = useAuth()
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -77,7 +76,6 @@ export default function Register(): JSX.Element {
 
     try {
       await register({ email: user.email, password: user.password })
-      navigate('/')
     } catch {
       setError(error => ({ ...error, email: 'Ya existe' }))
     }

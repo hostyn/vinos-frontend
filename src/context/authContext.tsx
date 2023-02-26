@@ -1,9 +1,16 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { isValidAuth } from '../services/auth'
+import {
+  type IUser,
+  isValidAuth,
+  login as serviceLogin,
+  register as serviceRegister,
+} from '../services/auth'
 
 interface IAuthContext {
   loading: boolean
   isAuthenticated: boolean
+  login: (user: IUser) => Promise<void>
+  register: (user: IUser) => Promise<void>
 }
 
 interface Props {
@@ -13,6 +20,8 @@ interface Props {
 const authContext = createContext<IAuthContext>({
   loading: true,
   isAuthenticated: false,
+  login: async () => {},
+  register: async () => {},
 })
 
 export const useAuth = (): IAuthContext => useContext(authContext)
@@ -20,6 +29,18 @@ export const useAuth = (): IAuthContext => useContext(authContext)
 export default function AuthProvider({ children }: Props): JSX.Element {
   const [loading, setLoading] = useState(true)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+
+  const login = async (user: IUser): Promise<void> => {
+    await serviceLogin(user)
+    setIsAuthenticated(true)
+    setLoading(false)
+  }
+
+  const register = async (user: IUser): Promise<void> => {
+    await serviceRegister(user)
+    setIsAuthenticated(true)
+    setLoading(false)
+  }
 
   useEffect(() => {
     isValidAuth()
@@ -34,7 +55,7 @@ export default function AuthProvider({ children }: Props): JSX.Element {
   }, [])
 
   return (
-    <authContext.Provider value={{ loading, isAuthenticated }}>
+    <authContext.Provider value={{ loading, isAuthenticated, login, register }}>
       {children}
     </authContext.Provider>
   )

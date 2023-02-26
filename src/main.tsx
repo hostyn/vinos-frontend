@@ -19,11 +19,11 @@ const GlobalStyle = createGlobalStyle`
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <AuthProvider>
-      <BrowserRouter>
-        <GlobalStyle />
+    <GlobalStyle />
+    <BrowserRouter>
+      <AuthProvider>
         <App />
-      </BrowserRouter>
-    </AuthProvider>
+      </AuthProvider>
+    </BrowserRouter>
   </React.StrictMode>
 )
