@@ -21,7 +21,6 @@ const ModalDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 1rem;
   background-color: ${COLORS.background};
   border-radius: 10px;
   box-shadow: 0px 0px 30px 10px ${COLORS.shadow};

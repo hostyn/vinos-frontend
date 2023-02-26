@@ -16,7 +16,6 @@ services:
     volumes:
       - .:/usr/src/app
 
-
   vinos-backend:
     container_name: vinos-backend
     restart: always
@@ -25,6 +24,7 @@ services:
       - PORT=3000
       - MONGODB_URI=mongodb://mongo/vinosdb
       - PRIVATE_KEY=supersecretkey
+      - COOKIE_NAME=vinosAuthToken
     links:
       - mongo
     ports:

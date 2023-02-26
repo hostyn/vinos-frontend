@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 interface ButtonProps {
   fontSize?: string
+  margin?: string
 }
 
 const Button = styled.button<ButtonProps>`
@@ -18,6 +19,7 @@ const Button = styled.button<ButtonProps>`
     rgba(189, 0, 0, 1) 35%,
     rgba(106, 0, 0, 1) 100%
   );
+  margin: ${props => props.margin ?? '0'};
 
   transition: 0.1s;
 

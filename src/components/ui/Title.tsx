@@ -3,6 +3,7 @@ import { COLORS } from '../../config/constants'
 
 interface TitleProps {
   fontSize?: string
+  margin?: string
 }
 
 const Title = styled.div<TitleProps>`
@@ -10,6 +11,7 @@ const Title = styled.div<TitleProps>`
   font-family: 'Sentient';
   font-weight: bold;
   color: ${COLORS.text};
+  margin: ${props => props.margin ?? '0'};
 `
 
 export default Title
