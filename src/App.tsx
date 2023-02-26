@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import Background from './components/Background'
 import NotAuthenticatedContent from './components/NotAuthenticatedContent'
 import ProtectedContent from './components/ProtectedContent'
+import Add from './pages/Add'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
@@ -32,6 +33,14 @@ const App = (): JSX.Element => {
             <NotAuthenticatedContent>
               <Register />
             </NotAuthenticatedContent>
+          }
+        />
+        <Route
+          path="/add"
+          element={
+            <ProtectedContent>
+              <Add />
+            </ProtectedContent>
           }
         />
       </Route>

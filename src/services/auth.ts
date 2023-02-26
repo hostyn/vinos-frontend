@@ -5,7 +5,7 @@ export interface IUser {
   password: string
 }
 
-interface IVarietyAndType {
+export interface IVarietyAndType {
   _id: string
   name: string
 }
@@ -22,6 +22,17 @@ export interface IMeasurement {
   observations: string
   createdAt: string
   updatedAt: string
+}
+
+interface IPostMeasurement {
+  year: number
+  variety: string
+  type: string
+  color: string
+  temperature: number
+  alcohol: number
+  ph: number
+  observations: string
 }
 
 export const register = async (user: IUser): Promise<void> => {
@@ -91,4 +102,51 @@ export const getMeasurements = async (): Promise<IMeasurement[]> => {
   const { measurements } = await res.json()
 
   return measurements
+}
+
+export const getVarieties = async (): Promise<IVarietyAndType[]> => {
+  const res = await fetch(`${VITE_BACKEND_URI}/winevarieties`, {
+    method: 'GET',
+    credentials: 'include',
+  })
+
+  if (res.status !== 200) {
+    throw new Error(res.status.toString())
+  }
+
+  const { wineVarieties } = await res.json()
+
+  return wineVarieties
+}
+
+export const getTypes = async (): Promise<IVarietyAndType[]> => {
+  const res = await fetch(`${VITE_BACKEND_URI}/winetypes`, {
+    method: 'GET',
+    credentials: 'include',
+  })
+
+  if (res.status !== 200) {
+    throw new Error(res.status.toString())
+  }
+
+  const { wineTypes } = await res.json()
+
+  return wineTypes
+}
+
+export const postMeasurement = async (
+  measurement: IPostMeasurement
+): Promise<void> => {
+  const res = await fetch(`${VITE_BACKEND_URI}/measurements`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(measurement),
+  })
+
+  if (res.status !== 200) {
+    throw new Error(res.status.toString())
+  }
 }

@@ -114,7 +114,7 @@ export default function Register(): JSX.Element {
       </Flex>
       <Input
         color={error.password ? COLORS.error : COLORS.primary}
-        placeholder="********"
+        placeholder="••••••••"
         type="password"
         icon={
           <PasswordIcon
@@ -135,7 +135,7 @@ export default function Register(): JSX.Element {
       </Flex>
       <Input
         color={error.repeatPassword ? COLORS.error : COLORS.primary}
-        placeholder="********"
+        placeholder="••••••••"
         type="password"
         icon={
           <PasswordIcon

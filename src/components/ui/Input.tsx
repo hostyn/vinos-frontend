@@ -4,19 +4,25 @@ import { COLORS } from '../../config/constants'
 
 interface IInput {
   placeholder: string
-  icon: JSX.Element
+  icon?: JSX.Element
   type?: string
   name?: string
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => any
   value?: string
   color?: string
+  padding?: string
 }
 
-const InputDiv = styled.div`
+interface IInputDiv {
+  color?: string
+  padding?: string
+}
+
+const InputDiv = styled.div<IInputDiv>`
   border-bottom: 2px solid ${props => props.color ?? COLORS.primary};
   display: flex;
   gap: 10px;
-  padding: 5px;
+  padding: ${props => props.padding ?? '5px'};
 `
 
 const StyledInput = styled.input`
@@ -39,9 +45,10 @@ export default function Input({
   name,
   value,
   color,
+  padding,
 }: IInput): JSX.Element {
   return (
-    <InputDiv color={color}>
+    <InputDiv color={color} padding={padding}>
       {icon}
       <StyledInput
         placeholder={placeholder}

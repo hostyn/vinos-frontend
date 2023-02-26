@@ -18,7 +18,7 @@ const ModalContainer = styled.div`
 const ModalDiv = styled.form`
   width: 25rem;
   max-width: 90vw;
-  height: 30rem;
+  height: 36rem;
   padding: 2rem;
   display: flex;
   flex-direction: column;
