@@ -34,3 +34,15 @@ export const login = async (user: IUser): Promise<void> => {
     throw new Error('user-already-exists')
   }
 }
+
+export const isValidAuth = async (): Promise<boolean> => {
+  const res = await fetch(`${VITE_BACKEND_URI}/checkauth`, {
+    method: 'GET',
+    credentials: 'include',
+  })
+
+  if (res.status !== 200) {
+    return false
+  }
+  return true
+}

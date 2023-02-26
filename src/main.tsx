@@ -4,6 +4,7 @@ import { createGlobalStyle } from 'styled-components'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 import './styles/fonts.css'
+import AuthProvider from './context/authContext'
 
 const GlobalStyle = createGlobalStyle`
   *, *:before, *:after {
@@ -18,9 +19,11 @@ const GlobalStyle = createGlobalStyle`
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <GlobalStyle />
-      <App />
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <GlobalStyle />
+        <App />
+      </BrowserRouter>
+    </AuthProvider>
   </React.StrictMode>
 )
