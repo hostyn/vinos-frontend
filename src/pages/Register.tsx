@@ -70,7 +70,10 @@ export default function Register(): JSX.Element {
     setUser(user => ({ ...user, [target.name]: target.value }))
   }
 
-  const handleRegister = async (): Promise<void> => {
+  const handleRegister = async (
+    e: React.ChangeEvent<HTMLFormElement>
+  ): Promise<void> => {
+    e.preventDefault()
     const error = validateUser()
     if (error) return
 
@@ -82,7 +85,7 @@ export default function Register(): JSX.Element {
   }
 
   return (
-    <Modal>
+    <Modal onSubmit={handleRegister}>
       <Title margin="0 0 1.5rem 0">Registrarse</Title>
       <Flex>
         <Text>Correo electrónico</Text>
@@ -144,9 +147,7 @@ export default function Register(): JSX.Element {
         value={user.repeatPassword}
       />
 
-      <Button margin="1.5rem 0 .5rem 0" onClick={handleRegister}>
-        Registrarse
-      </Button>
+      <Button margin="1.5rem 0 .5rem 0">Registrarse</Button>
       <Link to="/login">Iniciar sesión</Link>
     </Modal>
   )

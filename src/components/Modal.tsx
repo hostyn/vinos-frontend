@@ -1,8 +1,10 @@
+import type React from 'react'
 import styled from 'styled-components'
 import { COLORS } from '../config/constants'
 
 interface ModalProps {
   children: JSX.Element | JSX.Element[]
+  onSubmit?: (e: React.ChangeEvent<HTMLFormElement>) => void
 }
 
 const ModalContainer = styled.div`
@@ -13,7 +15,7 @@ const ModalContainer = styled.div`
   align-items: center;
 `
 
-const ModalDiv = styled.div`
+const ModalDiv = styled.form`
   width: 25rem;
   max-width: 90vw;
   height: 30rem;
@@ -26,10 +28,10 @@ const ModalDiv = styled.div`
   box-shadow: 0px 0px 30px 10px ${COLORS.shadow};
 `
 
-export default function Modal({ children }: ModalProps): JSX.Element {
+export default function Modal({ children, onSubmit }: ModalProps): JSX.Element {
   return (
     <ModalContainer>
-      <ModalDiv>{children}</ModalDiv>
+      <ModalDiv onSubmit={onSubmit}>{children}</ModalDiv>
     </ModalContainer>
   )
 }

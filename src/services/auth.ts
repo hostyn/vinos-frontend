@@ -31,7 +31,8 @@ export const login = async (user: IUser): Promise<void> => {
   })
 
   if (res.status !== 200) {
-    throw new Error('user-already-exists')
+    const { error } = await res.json()
+    throw new Error(error)
   }
 }
 
