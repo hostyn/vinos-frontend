@@ -1,16 +1,10 @@
-FROM node:18
+FROM node:18 as builder
 
-RUN mkdir -p /usr/src/app
-
-WORKDIR /usr/src/app
-
-COPY package*.json ./
-RUN yarn
-
+WORKDIR /tmp
 COPY . .
-
+RUN yarn install
 RUN yarn build
 
-EXPOSE 3000
+FROM nginx as production
+COPY --from=builder /tmp/dist /usr/share/nginx/html
 
-CMD "yarn" "preview"
