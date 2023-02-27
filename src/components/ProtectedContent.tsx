@@ -1,5 +1,6 @@
 import { Navigate } from 'react-router-dom'
 import { useAuth } from '../context/authContext'
+import Loading from './Loading'
 
 interface Props {
   children: JSX.Element | JSX.Element[]
@@ -8,7 +9,7 @@ interface Props {
 export default function ProtectedContent({ children }: Props): JSX.Element {
   const { isAuthenticated, loading } = useAuth()
 
-  if (loading) return <h1>Loading</h1>
+  if (loading) return <Loading />
   if (!isAuthenticated) {
     return <Navigate to="/login" />
   }

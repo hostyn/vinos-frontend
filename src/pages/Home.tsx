@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import Loading from '../components/Loading'
 import MeasurementCard from '../components/MeasurementCard'
 import Button from '../components/ui/Button'
 import Flex from '../components/ui/Flex'
@@ -64,7 +65,7 @@ export default function Home(): JSX.Element {
         </Flex>
 
         {loading ? (
-          <h1>Loading</h1>
+          <Loading />
         ) : (
           measurements.map(measurement => (
             <MeasurementCard key={measurement._id} measurement={measurement} />
